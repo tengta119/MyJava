@@ -15,9 +15,11 @@ public class UI
 
         Graphics g = jf.getGraphics();
         Mouse mouse = new Mouse(g);
+        mouse.setG(g);
         jf.addMouseListener(mouse);
 
     }
+
     public static void main(String []args)
     {
         UI myUI = new UI();
