@@ -10,11 +10,18 @@ import java.lang.invoke.SwitchPoint;
 public class Image
 {
     public String path ;
-    BufferedImage bufferedImage = null;
     int[][] arr=null;
     String name;
     Graphics g;
-    public Image(String path,String n,Graphics g)
+    private BufferedImage[] bufferedImages = new BufferedImage[1];
+
+    public BufferedImage[] getBufferedImages()
+    {
+        System.out.println("ImageGetBufferedImages");
+        return bufferedImages;
+    }
+
+    public Image(String path, String n, Graphics g)
     {
         arr=getImagePixel(path);
         name = n;
@@ -23,6 +30,7 @@ public class Image
 
     public int[][] getImagePixel(String path)
     {
+        BufferedImage bufferedImage = null;
         try
         {
             File file = new File(path);
@@ -46,6 +54,8 @@ public class Image
     }
     public void drawPixelOriginal(int[][] pixelArr)
     {
+        BufferedImage bufferedImage = new BufferedImage(arr[0].length,arr.length,BufferedImage.TYPE_INT_RGB);
+        Graphics bufferG = bufferedImage.getGraphics();
         for(int i= 0; i<pixelArr.length;i++)
         {
             for(int j=0 ; j<pixelArr[i].length;j++)
@@ -55,13 +65,17 @@ public class Image
                 int green = (pixel >> 8) & 0xFF;
                 int blue = (pixel >> 0) & 0xFF;
                 Color color = new Color(red,green,blue);
-                g.setColor(color);
-                g.drawLine(j,i+100,j,i+100);
+                bufferG.setColor(color);
+                bufferG.drawLine(j,i,j,i+100);
             }
         }
+        g.drawImage(bufferedImage,0,100,null);
+        bufferedImages[0]=bufferedImage;
     }
     public void drawPixelGray(int[][] pixelArr)
     {
+        BufferedImage bufferedImage = new BufferedImage(arr[0].length,arr.length,BufferedImage.TYPE_INT_RGB);
+        Graphics bufferG = bufferedImage.getGraphics();
         for(int i= 0; i<pixelArr.length;i++)
         {
             for(int j=0 ; j<pixelArr[i].length;j++)
@@ -70,15 +84,19 @@ public class Image
                 int red = (pixel >> 16) & 0xFF;
                 int green = (pixel >> 8) & 0xFF;
                 int blue = (pixel >> 0) & 0xFF;
-                int gray = (int)(red*0.299+green*0.587+blue*0.144);
+                int gray = (int)((red+green+blue)/3);
                 Color color = new Color(gray,gray,gray);
-                g.setColor(color);
-                g.fillRect(j,i+100,1,1);
+                bufferG.setColor(color);
+                bufferG.fillRect(j,i,1,1);
             }
         }
+        g.drawImage(bufferedImage,0,100,null);
+        bufferedImages[0]=bufferedImage;
     }
     public void drawPixelMosaic(int[][] pixelArr)
     {
+        BufferedImage bufferedImage = new BufferedImage(arr[0].length,arr.length,BufferedImage.TYPE_INT_RGB);
+        Graphics bufferG = bufferedImage.getGraphics();
         for(int i= 0; i<pixelArr.length;i++)
         {
             for(int j=0 ; j<pixelArr[i].length;j+=10)
@@ -88,10 +106,12 @@ public class Image
                 int green = (pixel >> 8) & 0xFF;
                 int blue = (pixel >> 0) & 0xFF;
                 Color color = new Color(red,green,blue);
-                g.setColor(color);
-                g.fillRect(j,i+100,10,10);
+                bufferG.setColor(color);
+                bufferG.fillRect(j,i,10,10);
             }
         }
+        g.drawImage(bufferedImage,0,100,null);
+        bufferedImages[0]=bufferedImage;
     }
     public void show()
     {

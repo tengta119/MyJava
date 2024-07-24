@@ -19,7 +19,14 @@ public class Mouse implements MouseListener, ActionListener
     String path = "D:\\Jave\\1.png";
     Graphics g;
     int num=0;
-    public  Image[] images=new Image[100];
+    public  Image[] images=new Image[1];
+    private BufferedImage[] bufferedImages = new BufferedImage[1];
+
+    public BufferedImage[] getBufferedImages()
+    {
+        System.out.println("MouseGetBufferedImages");
+        return bufferedImages;
+    }
 
     public void setG(Graphics g)
     {
@@ -64,6 +71,7 @@ public class Mouse implements MouseListener, ActionListener
     {
         Image image = new Image(path,e.getActionCommand(),g);
         image.show();
-        images[num++]=image;
+        images[0]=image;
+        bufferedImages = images[0].getBufferedImages();
     }
 }
