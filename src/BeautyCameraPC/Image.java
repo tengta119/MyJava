@@ -113,6 +113,10 @@ public class Image
         g.drawImage(bufferedImage,0,100,null);
         bufferedImages[0]=bufferedImage;
     }
+    public void withDraw(int[][] pixelArr)
+    {
+        drawPixelOriginal(pixelArr);
+    }
     public void show()
     {
         switch (name)
@@ -126,6 +130,7 @@ public class Image
             case "黑白":
                 drawPixelGray(arr);
                 break;
+
         }
     }
 }

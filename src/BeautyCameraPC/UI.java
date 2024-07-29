@@ -14,15 +14,22 @@ public class UI
         jf.setLocationRelativeTo(null);
         jf.setSize(1000,1000);
         jf.setVisible(true);
-        jf.setLayout(new FlowLayout());
+        //jf.setLayout(new FlowLayout());
         Mouse mouse = new Mouse();
-        String[] name = {"原图","马赛克","黑白"};
+        JPanel northPanel = new JPanel();
+        northPanel.setBackground(Color.GREEN);
+        northPanel.setPreferredSize(new Dimension(0,50));
+        jf.add(northPanel,BorderLayout.NORTH);
+
+
+        String[] name = {"原图","马赛克","黑白","撤回"};
         for(int i=0 ; i< name.length;i++)
         {
             JButton jbu = new JButton(name[i]);
-            jf.add(jbu);
+            northPanel.add(jbu);
             jbu.addActionListener(mouse);
         }
+        jf.setVisible(true);
         Graphics g = jf.getGraphics();
         jf.addMouseListener(mouse);
         mouse.setG(g);
