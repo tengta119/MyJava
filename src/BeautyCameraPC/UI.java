@@ -22,7 +22,7 @@ public class UI
         jf.add(northPanel,BorderLayout.NORTH);
 
 
-        String[] name = {"原图","马赛克","黑白","撤回"};
+        String[] name = {"原图","马赛克","黑白","撤回","右转","左转"};
         for(int i=0 ; i< name.length;i++)
         {
             JButton jbu = new JButton(name[i]);

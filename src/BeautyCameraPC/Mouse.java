@@ -1,5 +1,4 @@
 package BeautyCameraPC;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -75,6 +74,33 @@ public class Mouse implements MouseListener, ActionListener
         if(e.getActionCommand().equals("撤回"))
         {
             images[--num].show();
+            return;
+        }
+        if(e.getActionCommand().equals("右转"))
+        {
+            int[][]arrRight = images[num-1].getArr();
+            int[][]arrRightN = new int[arrRight[0].length][arrRight.length];
+            for(int i=0 ; i<arrRightN.length ; i++)
+            {
+                for(int j=0 ; j<arrRight[0].length ; j++)
+                {
+                    arrRightN[j][arrRight.length-1-i] = arrRight[i][j];
+                }
+            }
+
+            images[num-1].setArr(arrRightN);
+            images[num-1].show();
+            return;
+        }
+        if(e.getActionCommand().equals("左转"))
+        {
+            int[][]arrLeft = images[num-1].getArr();
+            int[][]arrleftN = new int[arrLeft[0].length][arrLeft.length];
+            for(int i=0 ; i< arrLeft.length ; i++)
+                for(int j=0 ; j<arrLeft[0].length ; j++)
+                    arrleftN[j][arrleftN.length-i]=arrLeft[i][j];
+            images[num-1].setArr(arrleftN);
+            images[num-1].show();
             return;
         }
         Image image = new Image(path,e.getActionCommand(),g);

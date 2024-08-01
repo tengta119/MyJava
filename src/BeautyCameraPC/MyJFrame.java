@@ -1,12 +1,11 @@
 package BeautyCameraPC;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MyJFrame extends JFrame
 {
-    Image[] images=null;
+    Image[] images;
     int num=0;
     Graphics g;
 
@@ -18,7 +17,10 @@ public class MyJFrame extends JFrame
     public void paint(Graphics g)
     {
         super.paint(g);
-        g.drawImage(images[0].getBufferedImages()[0],0,100,null );
+        for (Image image : images)
+        {
+            g.drawImage(image.getBufferedImages()[0], 0, 100, null);
+        }
         System.out.println("paint........");
     };
 

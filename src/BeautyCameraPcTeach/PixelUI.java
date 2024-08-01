@@ -1,50 +1,48 @@
 package BeautyCameraPcTeach;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+public class PixelUI {
 
-public class PixelUI
-{
-    //显示美颜相机操作界面
     public void initUI(){
-        MFrame jf = new MFrame();
+        //JFrame 默认是边框布局
+        JFrame jf = new JFrame();
         jf.setTitle("美颜相机");
         jf.setSize(900,900);
         jf.setLocationRelativeTo(null);
         jf.setDefaultCloseOperation(3);
 
-        jf.setLayout(new FlowLayout());
+        //面板对象
+        //JPanel 默认流式布局
+        JPanel northPanel = new JPanel();
+        northPanel.setBackground(Color.GREEN);
+        northPanel.setPreferredSize(new Dimension(0,50));
+        jf.add(northPanel,BorderLayout.NORTH);
 
-        PixelMouse mouse = new PixelMouse();
-        String[] name = {"原图","马赛克","灰度"};
+        MPanel pixelPanel = new MPanel();
+        pixelPanel.setBackground(Color.WHITE);
+        jf.add(pixelPanel,BorderLayout.CENTER);
+
+        PixelListener listener = new PixelListener(pixelPanel);
+
+        String[] name = {"撤回","原图","马赛克","灰度","右转","左转","放大","缩小"};
         for(int i=0;i<name.length;i++) {
-            //功能按钮
             JButton jbu = new JButton(name[i]);
-            jf.add(jbu);
-            jbu.addActionListener(mouse);
+            northPanel.add(jbu);
+            jbu.addActionListener(listener);
         }
+
 
         jf.setVisible(true);
 
-        //画笔：从窗体上获取画笔，一定要在窗体显示可见之后
-        Graphics g = jf.getGraphics();
+        listener.setG(pixelPanel.getGraphics());
 
-        //给窗体添加鼠标监听器方法
-        // 类名 对象名 = new 构造方法;
+        //把保存图像的数据从PixelListener类传递到MPanel类中
+        pixelPanel.setBufferedImageArr(listener.getBufferedImageArr());
 
-        jf.addMouseListener(mouse);
 
-        //把画笔对象传递给PixelMouse类
-        mouse.setGr(g);
-
-        //把缓存图片从PixelMouse 传递到 MFrame 类中
-        BufferedImage[] bufferedImageArr = mouse.getBufferedImageArr();
-        jf.setBufferedImage(bufferedImageArr);
     }
 
     public static void main(String[] args) {
-        PixelUI ui = new PixelUI();
-        ui.initUI();
+        new PixelUI().initUI();
     }
-
 }

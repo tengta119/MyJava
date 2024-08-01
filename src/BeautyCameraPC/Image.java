@@ -1,5 +1,4 @@
 package BeautyCameraPC;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -26,6 +25,16 @@ public class Image
         arr=getImagePixel(path);
         name = n;
         this.g=g;
+    }
+
+    public void setArr(int[][] arr)
+    {
+        this.arr = arr;
+    }
+
+    public int[][] getArr()
+    {
+        return this.arr;
     }
 
     public int[][] getImagePixel(String path)
