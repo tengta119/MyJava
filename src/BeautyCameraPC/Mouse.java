@@ -73,6 +73,7 @@ public class Mouse implements MouseListener, ActionListener
     {
         if(e.getActionCommand().equals("撤回"))
         {
+            images[--num]=null;
             images[--num].show();
             return;
         }
@@ -80,7 +81,7 @@ public class Mouse implements MouseListener, ActionListener
         {
             int[][]arrRight = images[num-1].getArr();
             int[][]arrRightN = new int[arrRight[0].length][arrRight.length];
-            for(int i=0 ; i<arrRightN.length ; i++)
+            for(int i=0 ; i<arrRight.length ; i++)
             {
                 for(int j=0 ; j<arrRight[0].length ; j++)
                 {
@@ -100,6 +101,18 @@ public class Mouse implements MouseListener, ActionListener
                 for(int j=0 ; j<arrLeft[0].length ; j++)
                     arrleftN[j][arrleftN.length-i]=arrLeft[i][j];
             images[num-1].setArr(arrleftN);
+            images[num-1].show();
+            return;
+        }
+        if(e.getActionCommand().equals("放大"))
+        {
+            images[num-1].setMax(images[num-1].getMax()+1);
+            images[num-1].show();
+            return;
+        }
+        if(e.getActionCommand().equals("缩小"))
+        {
+            images[num-1].setMax(images[num-1].getMax()-1);
             images[num-1].show();
             return;
         }

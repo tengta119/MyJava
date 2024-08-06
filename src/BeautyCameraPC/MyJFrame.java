@@ -19,8 +19,10 @@ public class MyJFrame extends JFrame
         super.paint(g);
         for (Image image : images)
         {
-            g.drawImage(image.getBufferedImages()[0], 0, 100, null);
+            if(image!=null)
+                g.drawImage(image.getBufferedImages()[0], 0, 100, null);
         }
+
         System.out.println("paint........");
     };
 

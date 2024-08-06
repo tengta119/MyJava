@@ -12,6 +12,7 @@ public class Image
     int[][] arr=null;
     String name;
     Graphics g;
+    int max=0;
     private BufferedImage[] bufferedImages = new BufferedImage[1];
 
     public BufferedImage[] getBufferedImages()
@@ -35,6 +36,16 @@ public class Image
     public int[][] getArr()
     {
         return this.arr;
+    }
+
+    public int getMax()
+    {
+        return max;
+    }
+
+    public void setMax(int max)
+    {
+        this.max = max;
     }
 
     public int[][] getImagePixel(String path)
@@ -78,7 +89,7 @@ public class Image
                 bufferG.drawLine(j,i,j,i+100);
             }
         }
-        g.drawImage(bufferedImage,0,100,null);
+        g.drawImage(bufferedImage,0,100,bufferedImage.getWidth()+(max*50),bufferedImage.getHeight()+(max*50),null);
         bufferedImages[0]=bufferedImage;
     }
     public void drawPixelGray(int[][] pixelArr)
@@ -99,7 +110,7 @@ public class Image
                 bufferG.fillRect(j,i,1,1);
             }
         }
-        g.drawImage(bufferedImage,0,100,null);
+        g.drawImage(bufferedImage,0,100,bufferedImage.getWidth()+(max*50),bufferedImage.getHeight()+(max*50),null);
         bufferedImages[0]=bufferedImage;
     }
     public void drawPixelMosaic(int[][] pixelArr)
@@ -119,7 +130,7 @@ public class Image
                 bufferG.fillRect(j,i,10,10);
             }
         }
-        g.drawImage(bufferedImage,0,100,null);
+        g.drawImage(bufferedImage,0,100,bufferedImage.getWidth()+(max*50),bufferedImage.getHeight()+(max*50),null);
         bufferedImages[0]=bufferedImage;
     }
     public void withDraw(int[][] pixelArr)
