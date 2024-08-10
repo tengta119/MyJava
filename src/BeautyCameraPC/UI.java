@@ -33,7 +33,8 @@ public class UI
         Graphics g = jf.getGraphics();
         jf.addMouseListener(mouse);
         mouse.setG(g);
-        jf.images= mouse.images;
+        //jf.images= mouse.images;
+        jf.imageList=mouse.imageList;
     }
 
     public static void main(String []args)

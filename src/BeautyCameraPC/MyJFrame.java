@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class MyJFrame extends JFrame
 {
+    ArrList<Image> imageList;
     Image[] images;
     int num=0;
     Graphics g;
@@ -17,10 +18,15 @@ public class MyJFrame extends JFrame
     public void paint(Graphics g)
     {
         super.paint(g);
-        for (Image image : images)
+//        for (Image image : images)
+//        {
+//            if(image!=null)
+//                g.drawImage(image.getBufferedImages()[0], 0, 100, null);
+//        }
+        for(int i=0 ; i<imageList.size() ; i++)
         {
-            if(image!=null)
-                g.drawImage(image.getBufferedImages()[0], 0, 100, null);
+            Image image =imageList.get(i);
+            g.drawImage(image.getBufferedImages()[0], 0, 100, null);
         }
 
         System.out.println("paint........");

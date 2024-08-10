@@ -19,6 +19,7 @@ public class Mouse implements MouseListener, ActionListener
     Graphics g;
     int num=0;
     public  Image[] images=new Image[100];
+    public ArrList<Image> imageList = new ArrList();
     private BufferedImage[] bufferedImages = new BufferedImage[1];
 
     public BufferedImage[] getBufferedImages()
@@ -73,13 +74,28 @@ public class Mouse implements MouseListener, ActionListener
     {
         if(e.getActionCommand().equals("撤回"))
         {
-            images[--num]=null;
-            images[--num].show();
+            imageList.remove(--num);
+            Image image =imageList.get(--num);
+            image.show();
+//            images[--num]=null;
+//            images[--num].show();
             return;
         }
         if(e.getActionCommand().equals("右转"))
         {
-            int[][]arrRight = images[num-1].getArr();
+//            int[][]arrRight = images[num-1].getArr();
+//            int[][]arrRightN = new int[arrRight[0].length][arrRight.length];
+//            for(int i=0 ; i<arrRight.length ; i++)
+//            {
+//                for(int j=0 ; j<arrRight[0].length ; j++)
+//                {
+//                    arrRightN[j][arrRight.length-1-i] = arrRight[i][j];
+//                }
+//            }
+//
+//            images[num-1].setArr(arrRightN);
+//            images[num-1].show();
+            int[][]arrRight = (imageList.get(num-1)).getArr();
             int[][]arrRightN = new int[arrRight[0].length][arrRight.length];
             for(int i=0 ; i<arrRight.length ; i++)
             {
@@ -89,8 +105,8 @@ public class Mouse implements MouseListener, ActionListener
                 }
             }
 
-            images[num-1].setArr(arrRightN);
-            images[num-1].show();
+            (imageList.get(num-1)).setArr(arrRightN);
+            (imageList.get(num-1)).show();
             return;
         }
         if(e.getActionCommand().equals("左转"))
@@ -106,19 +122,20 @@ public class Mouse implements MouseListener, ActionListener
         }
         if(e.getActionCommand().equals("放大"))
         {
-            images[num-1].setMax(images[num-1].getMax()+1);
-            images[num-1].show();
+            (imageList.get(num-1)).setMax(images[num-1].getMax()+1);
+            (imageList.get(num-1)).show();
             return;
         }
         if(e.getActionCommand().equals("缩小"))
         {
-            images[num-1].setMax(images[num-1].getMax()-1);
-            images[num-1].show();
+            (imageList.get(num-1)).setMax(images[num-1].getMax()-1);
+            (imageList.get(num-1)).show();
             return;
         }
         Image image = new Image(path,e.getActionCommand(),g);
         image.show();
         images[num++]=image;
+        imageList.add(image);
         if(num>100)
             num=0;
 
